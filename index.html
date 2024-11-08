@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Calculator</title>
+</head>
+<body>
+<p id="display"></p>
+
+<script>
+let userWantsToContinue = true;
+do {
+let input = prompt("Welcome to the calculator. Please enter a number");
+let array = input.split(",").map(Number);
+console.log(array);
+
+let addMore = prompt('You entered ' + input + '. Enter another y/n?');  
+
+while (addMore.toLowerCase() === "y") {   
+    let newInput = prompt("Enter a number:");
+    array.push(parseFloat(newInput)); 
+    
+    let addMore = prompt('You entered ' + array.length + ' numbers. Are there more y/n?');
+    if (addMore.toLowerCase() !== "y"){
+    break;
+    };
+}
+
+let operation = prompt('What operations would you like to perform +, - , * , / ?');
+let result;
+
+if (operation === "/") {
+    if (array.length > 2) {
+        alert("Invalid calculation. We cannot perform division for more than 2 numbers. Please try again.");
+    } else {
+        result = array[0] / array[1];
+    }
+} else if (operation === "+") {
+    result = array.reduce((a, b) => a + b, 0);
+} else if (operation === "-") {
+    result = array.reduce((a, b) => a - b);
+} else if (operation === "*") {
+    result = array.reduce((a, b) => a * b, 1);
+} else {
+    alert("Invalid operation. Please try again.");
+}
+
+
+    let anotherCalculation = prompt('You entered ' + array.length + ' numbers. The answer is ' + result + '. Would you like to perform another calculation y/n?');
+    if (anotherCalculation.toLowerCase() !== "y") {
+        alert('Thank you for using the calculator. Goodbye now!');
+    }else{
+    userWantsToContinue = true;;
+    }
+} while (userWantsToContinue);
+
+</script>
+</body>
+</html>
