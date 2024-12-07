@@ -1,61 +1,85 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Lyn Lam"> 
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Calculator</title>
-</head>
-<body>
-<p id="display"></p>
+  </head>
+  <body>
+    <p id="display"></p>
 
-<script>
-let userWantsToContinue = true;
-do {
-let input = prompt("Welcome to the calculator. Please enter a number");
-let array = input.split(",").map(Number);
-console.log(array);
+    <script>
+      // Define global variables to prompt user to use calculator
+      let userWantsToContinue = true;
+      // An array to store inputs entered by user
+      let array;
+      do {
+        let input = prompt("Welcome to the calculator. Please enter a number");
+        if (input !== null) {
+          array = input.split(",").map(Number);
+          console.log(array);
+        } else {
+          input;
+        }
 
-let addMore = prompt('You entered ' + input + '. Enter another y/n?');  
+        //Ask if user wants to enter more numbers
+        let addMore = prompt("You entered " + input + ". Enter another y/n?");
 
-while (addMore.toLowerCase() === "y") {   
-    let newInput = prompt("Enter a number:");
-    array.push(parseFloat(newInput)); 
-    
-    let addMore = prompt('You entered ' + array.length + ' numbers. Are there more y/n?');
-    if (addMore.toLowerCase() !== "y"){
-    break;
-    };
-}
+        while (addMore.toLowerCase() === "y") {
+          let newInput = prompt("Enter a number:");
+          array.push(parseFloat(newInput));
 
-let operation = prompt('What operations would you like to perform +, - , * , / ?');
-let result;
+          //Tell the user how many numbers are entered after each entry
+          let addMore = prompt(
+            "You entered " + array.length + " numbers. Are there more y/n?"
+          );
+          if (addMore.toLowerCase() !== "y") {
+            break;
+          }
+        }
+        // When user responds negative to adding more numbers, prompt with operation selection
+        let operation = prompt(
+          "What operations would you like to perform +, - , * , / ?"
+        );
+        let result;
 
-if (operation === "/") {
-    if (array.length > 2) {
-        alert("Invalid calculation. We cannot perform division for more than 2 numbers. Please try again.");
-    } else {
-        result = array[0] / array[1];
-    }
-} else if (operation === "+") {
-    result = array.reduce((a, b) => a + b, 0);
-} else if (operation === "-") {
-    result = array.reduce((a, b) => a - b);
-} else if (operation === "*") {
-    result = array.reduce((a, b) => a * b, 1);
-} else {
-    alert("Invalid operation. Please try again.");
-}
+        if (operation === "/") {
+          if (array.length > 2) {
+            alert(
+              "Invalid calculation. We cannot perform division for more than 2 numbers. Please try again."
+            );
+          } else {
+            result = array[0] / array[1];
+          }
+        } else if (operation === "+") {
+          result = array.reduce((a, b) => a + b, 0);
+        } else if (operation === "-") {
+          result = array.reduce((a, b) => a - b);
+        } else if (operation === "*") {
+          result = array.reduce((a, b) => a * b, 1);
+        } else {
+          alert("Invalid operation. Please try again.");
+        }
 
+        // Display to user the calculation result along with how many numbers were entered
+        let anotherCalculation = prompt(
+          "You entered " +
+            array.length +
+            " numbers. The answer is " +
+            result +
+            ". Would you like to perform another calculation y/n?" // Ask the user if they want to perform another calculation
+        );
 
-    let anotherCalculation = prompt('You entered ' + array.length + ' numbers. The answer is ' + result + '. Would you like to perform another calculation y/n?');
-    if (anotherCalculation.toLowerCase() !== "y") {
-        alert('Thank you for using the calculator. Goodbye now!');
-    }else{
-    userWantsToContinue = true;;
-    }
-} while (userWantsToContinue);
-
-</script>
-</body>
+        // When user chooses not to do another calculation, present a goodbye message
+        if (anotherCalculation.toLowerCase() !== "y") {
+          alert("Thank you for using the calculator. Goodbye now!");
+        } else {
+          userWantsToContinue = true;
+        }
+      } while (userWantsToContinue);
+    </script>
+  </body>
 </html>
